@@ -41,10 +41,11 @@ class Errors(commands.Cog):
             )
 
         elif isinstance(error, commands.DisabledCommand):
-            await ctx.send(f"Comando desactivado!:confused:\n*(Error: {error})*")
+            await ctx.send(f"Comando desactivado por Mr.Appu")
 
         elif isinstance(error, commands.CommandInvokeError):
             await ctx.send(f"Problema interno del comando :confused:\n*(Error: {error})*")
+            print("Error interno: " + str(error))
 
         elif isinstance(error, commands.TooManyArguments):
             await ctx.send(f"El error lo dice todo.:confused:\n*(Error: {error})*")
