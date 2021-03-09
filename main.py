@@ -51,7 +51,7 @@ async def ping(ctx):
 @commands.check(commands.is_owner())
 async def logout(ctx):
     msg = await ctx.send("Desconectando...")
-    await ctx.delete(delay=1)
+    await ctx.message.delete(delay=1)
     await msg.delete(delay=2)
     await client.close()
 
@@ -61,7 +61,7 @@ extensions = []
 for filename in os.listdir("./cogs"):
     if str(filename).endswith(".py"):
         client.load_extension(f"cogs.{filename[:-3]}")
-        extensions.append(filename[:-3])
+        extensions.append(filename)
 print(f"{extensions} loaded!")
 
 # Bot run
