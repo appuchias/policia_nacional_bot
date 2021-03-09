@@ -5,6 +5,7 @@ from rich.traceback import install
 from os import getenv
 from dotenv import load_dotenv
 from checks import channel
+from keep_alive import keep_alive
 
 load_dotenv()
 install()
@@ -66,4 +67,5 @@ print(f"{extensions} loaded!")
 
 # Bot run
 if __name__ == "__main__":
+    keep_alive()
     client.run(getenv("TOKEN"))
