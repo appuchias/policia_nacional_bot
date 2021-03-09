@@ -13,7 +13,7 @@ class Chat(commands.Cog):
     @commands.check(channel)
     async def suma(self, ctx, args: commands.Greedy[int]):
         "Suma varios números"
-        await ctx.send(sum(args))
+        await ctx.reply(sum(args))
 
     @commands.command()
     @commands.check(channel)
@@ -22,7 +22,7 @@ class Chat(commands.Cog):
         output = 1
         for n in args:
             output *= n
-        await ctx.send(output)
+        await ctx.reply(output)
 
     @commands.command()
     @commands.check(channel)
@@ -33,7 +33,7 @@ class Chat(commands.Cog):
             output += word
             output += " "
         output = output[::-1]
-        await ctx.send(output)
+        await ctx.reply(output)
 
     @commands.command()
     @commands.check(channel)
@@ -62,9 +62,9 @@ class Chat(commands.Cog):
                 embed.set_thumbnail(
                     url="https://i.pinimg.com/originals/d7/49/06/d74906d39a1964e7d07555e7601b06ad.gif"
                 )
-            await ctx.send(embed=embed)
+            await ctx.reply(embed=embed)
         else:
-            await ctx.send(
+            await ctx.reply(
                 f"Por favor, no te pases, {repetitions} está por encima de 20, mi máximo de repeticiones del comando! :warning:"
             )
 
