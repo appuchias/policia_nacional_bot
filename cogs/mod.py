@@ -41,7 +41,7 @@ class Mod(commands.Cog):
     # Commands
     # Bulk message delete
     @commands.command()
-    @commands.has_role("MOD")
+    @commands.has_permissions(administrator=True)
     async def clear(self, ctx, number: int = 5):
         n = number
         if int(n) > 100:
@@ -49,7 +49,9 @@ class Mod(commands.Cog):
             return
         await ctx.channel.purge(limit=(int(n) + 1))
         msg = await ctx.send(f"{str(n)} mensaje(s) eliminados!")
-        print(f"{str(n)} messages cleared in #{ctx.channel.name}")
+        print(
+            f"{n} messages cleared by @{ctx.author.name}#{ctx.author.discriminator} in #{ctx.channel.name}"
+        )
         await msg.delete(delay=2)
 
     # Kick someone
@@ -57,7 +59,8 @@ class Mod(commands.Cog):
     @commands.has_role("MOD")
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         await member.kick(reason=reason)
-        await ctx.send(f"{member} kickeado!")
+        await ctx.send(f"{member} expulsado!")
+        print(f"{member} expulsado!")
 
         await ctx.message.delete(delay=2)
 
@@ -67,6 +70,7 @@ class Mod(commands.Cog):
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         await member.ban(reason=reason)
         await ctx.send(f"{member} baneado!")
+        print(f"{member} baneado!")
 
         await ctx.message.delete(delay=2)
 
