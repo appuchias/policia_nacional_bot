@@ -1,37 +1,37 @@
 import discord
 from discord.ext import commands
-import asyncio
 
 
 class Extensions(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    ext_prefix = "cogs."
+
     # Commands
     # Load an extension
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def load(self, ctx, extension):
-        self.client.load_extension(f"cogs.{extension}")
-        await ctx.send(f"Extensión {extension} cargada!")
+    async def load(self, ctx, extension: str):
+        self.client.load_extension(self.ext_prefix + extension)
+        await ctx.send(f"Cargada!")
 
     # Unload an extension
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def unload(self, ctx, extension):
-        self.client.unload_extension(f"cogs.{extension}")
-        await ctx.send(f"Extensión {extension} descargada!")
+    async def unload(self, ctx, extension: str):
+        self.client.unload_extension(self.ext_prefix + extension)
+        await ctx.send(f"Descargada!")
 
     # Reload an extension
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def reload(self, ctx, extension):
-        self.client.unload_extension(f"cogs.{extension}")
-        await ctx.send(f"Extension {extension} descargada!")
-        await ctx.send("Recargando en breve...")
-        await asyncio.sleep(1)
-        self.client.load_extension(f"cogs.{extension}")
-        await ctx.send(f"Extensión {extension} recargada!")
+    async def reload(self, ctx, extension: str):
+        print("reload " + extension)
+        self.client.unload_extension(self.ext_prefix + extension)
+        await ctx.send(f"Descargada!")
+        self.client.load_extension(self.ext_prefix + extension)
+        await ctx.send(f"Recargada!")
 
 
 def setup(client):
