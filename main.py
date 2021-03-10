@@ -13,6 +13,8 @@ install()
 
 # VARS
 prefix = "!"
+intents = discord.Intents.default()
+intents.members = True
 client = commands.Bot(
     command_prefix=prefix,
     help_command=commands.MinimalHelpCommand(
@@ -21,7 +23,9 @@ client = commands.Bot(
         no_category="General",
         dm_help=None,
         dm_help_treshold=500,
+        case_insensitive=True,
     ),
+    intents=intents,
 )
 tz = pytz.timezone("Europe/Madrid")
 
@@ -38,6 +42,11 @@ async def on_ready():
         type=discord.ActivityType.watching,
     )
     await client.change_presence(activity=game, status=discord.Status.online)
+
+
+# @client.command()
+# async def member_join(ctx):
+#     client.dispatch("on_member_join", ctx.author)
 
 
 @client.command(aliases=["test"])
