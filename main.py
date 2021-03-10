@@ -12,7 +12,7 @@ install()
 
 
 # VARS
-prefix = "!"
+prefix = "!P"
 intents = discord.Intents.default()
 intents.members = True
 client = commands.Bot(
@@ -42,11 +42,6 @@ async def on_ready():
         type=discord.ActivityType.watching,
     )
     await client.change_presence(activity=game, status=discord.Status.online)
-
-
-# @client.command()
-# async def member_join(ctx):
-#     client.dispatch("on_member_join", ctx.author)
 
 
 @client.command(aliases=["test"])
