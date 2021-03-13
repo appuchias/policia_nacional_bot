@@ -20,10 +20,10 @@ class Events(commands.Cog):
         finally:
             await channel.send(f"{member.mention} se acaba de unir! :tada:")
 
-    @commands.Cog.listener()
-    async def on_member_remove(self, member: discord.Member):
-        channel = await self.client.fetch_channel(818569618770886697)  # #huidas
-        await channel.send(f"{member.mention} se acaba de ir D:")
+    # @commands.Cog.listener()
+    # async def on_member_remove(self, member: discord.Member):
+    #     channel = await self.client.fetch_channel(818569618770886697)  # #huidas
+    #     await channel.send(f"{member.mention} se acaba de ir D:")
 
 
 def setup(client):
