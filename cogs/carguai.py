@@ -1,7 +1,10 @@
 from typing import Union
 import discord
+from discord.channel import TextChannel
 from discord.ext import commands
 import asyncio
+
+from discord.ext.commands.core import command
 
 
 class Carguai(commands.Cog):
@@ -11,10 +14,16 @@ class Carguai(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def di(
-        self, ctx, channel: Union[discord.TextChannel, int] = 571380940664995842, *message: str
+        self,
+        ctx,
+        message_channel: Union[discord.TextChannel, int] = 571380940664995842,
+        *message: str,
     ) -> None:
-        if type(channel) == int:
-            channel = self.client.fetch_channel(channel)
+        channel = (
+            message_channel
+            if type(message_channel) == discord.TextChannel
+            else self.client.fetch_channel(message_channel)
+        )
         message = '"*' + " ".join(message) + '*"'
         await ctx.send(message)
         msg = await ctx.send("Correcto? (Si no es correcto espera un minuto)")
@@ -34,6 +43,25 @@ class Carguai(commands.Cog):
             await msg.clear_reactions()
         else:
             await channel.send(message)
+
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def die(
+        self, ctx, message_channel: Union[discord.TextChannel, int], *message: str,
+    ) -> None:
+        channel = (
+            message_channel
+            if type(message_channel) == discord.TextChannel
+            else self.client.fetch_channel(message_channel)
+        )
+
+        msg = [word.replace("\n", "llllll") for word in message]
+
+        embed = discord.Embed(
+            description=f'```{" ".join(msg)}```',
+            color=discord.Color.blurple(),
+        )
+        await channel.send(embed=embed)
 
 
 def setup(client):

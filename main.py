@@ -60,7 +60,6 @@ async def logout(ctx):
     await msg.delete(delay=2)
     await client.close()
 
-
 # Load all extensions
 extensions = []
 for filename in os.listdir("./cogs"):
